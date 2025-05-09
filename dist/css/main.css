@@ -4157,6 +4157,12 @@ body {
   }
 }
 
+@media (min-width: 47.99875em) {
+  .main-slider__pagination-line {
+    margin-bottom: -0.625rem;
+  }
+}
+
 @media (min-width: 61.99875em) {
   .footer__body {
     -webkit-box-flex: 1;
@@ -4183,10 +4189,6 @@ body {
   .footer-menu__list:has(:nth-child(7)) {
     -ms-grid-columns: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  .main-slider__pagination-line {
-    margin-bottom: -0.625rem;
   }
 
   .main-details__row {
