@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Details page</title>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="preload" href="./fonts/Lato-Light.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="./fonts/Lato-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="./fonts/Lato-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="./fonts/Lato-Semibold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="./fonts/Lato-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="./fonts/icons.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="css/main.min.css" as="style" crossorigin="anonymous">
+	<style>
+		@font-face {
+			font-family: "icons";
+			font-display: swap;
+			src: url("./fonts/icons.woff2") format("woff2");
+			font-weight: 400;
+			font-style: normal;
+		}
+
+		@font-face {
+			font-family: "Lato";
+			font-display: swap;
+			src: url("./fonts/Lato-Light.woff2") format("woff2");
+			font-weight: 300;
+			font-style: normal;
+		}
+
+		@font-face {
+			font-family: "Lato";
+			font-display: swap;
+			src: url("./fonts/Lato-Regular.woff2") format("woff2");
+			font-weight: 400;
+			font-style: normal;
+		}
+
+		@font-face {
+			font-family: "Lato";
+			font-display: swap;
+			src: url("./fonts/Lato-Medium.woff2") format("woff2");
+			font-weight: 500;
+			font-style: normal;
+		}
+
+		@font-face {
+			font-family: "Lato";
+			font-display: swap;
+			src: url("./fonts/Lato-Semibold.woff2") format("woff2");
+			font-weight: 600;
+			font-style: normal;
+		}
+
+		@font-face {
+			font-family: "Lato";
+			font-display: swap;
+			src: url("./fonts/Lato-Bold.woff2") format("woff2");
+			font-weight: 700;
+			font-style: normal;
+		}
+	</style>
+	<link rel="stylesheet" href="css/main.min.css?_v=20250510004617">
+	<link rel="preload" href="js/main.min.js" as="script">
+	<link rel='preload' fetchpriority='high' as='image' href='img/main/01.jpg' type='image/jpg'>
+
+	<link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+	<meta name="apple-mobile-web-app-title" content="Conli">
+	<link rel="manifest" href="site.webmanifest">
+</head>
+
+<body>
+	<div class="wrapper">
+		<header class="header">
+			<div class="header__wrapper">
+				<div class="header__container">
+					<div class="header__body">
+						<a href="#" class="header__logo logo">
+							<picture><source srcset="img/logo/logo.webp, img/logo/logo@2x.webp 2x" type="image/webp"><img class="img" width="132" height="45" fetchpriority="high" loading="eager" decoding="async" src="img/logo/logo.png" srcset="img/logo/logo@2x.png 2x" alt="Logo Conli"></picture>
+						</a>
+						<div class="header__menu menu">
+							<nav class="menu__body">
+								<ul class="menu__list">
+									<li class="menu__item"><a href="#" class="menu__link _active">Home</a></li>
+									<li class="menu__item"><a href="#" class="menu__link">Affitti</a></li>
+									<li class="menu__item"><a href="#" class="menu__link">Vendite</a></li>
+									<li class="menu__item"><a href="#" class="menu__link">Contatti</a></li>
+								</ul>
+							</nav>
+						</div>
+						<div class="header__actions">
+							<div class="header__btn-lang lang">
+								<button data-toggle class="lang__btn lang-btn">
+									<span class="lang-btn__title">IT</span>
+									<i class="lang-btn__btn-icon _icon-chevron-down"></i>
+								</button>
+								<div data-toggle-content class="lang__dropdown">
+									<ul class="lang__list scrollbar">
+										<li class="lang__item">
+											<a href="#" class="lang__link">
+												ENG
+											</a>
+										</li>
+										<li class="lang__item">
+											<a href="#" class="lang__link">
+												ESP
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<button type="button" aria-label="Menu icon" class="header__icon icon-menu"><span></span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<main class="page">
+			<section class="page__main-slide main-slide main-slide--details">
+				<div class="main-slide__img-ibg">
+					<picture><source srcset="img/main/01.webp" type="image/webp"><img data-parallax width="1440" height="694" fetchpriority="high" loading="eager" decoding="async" src="img/main/01.jpg" alt="product 01"></picture>
+				</div>
+				<div class="main-slide__container">
+					<div class="main-slide__content main-details">
+						<div class="main-details__row">
+							<div class="main-details__breadcrumns breadcrumbs">
+								<div class="breadcrumbs__container breadcrumbs__container--no-padding">
+									<div class="breadcrumbs__row">
+										<ul class="breadcrumbs__list">
+											<li class="breadcrumbs__item">
+												<a href="#" class="breadcrumbs__link"><span>Home</span></a>
+											</li>
+											<li class="breadcrumbs__item">
+												<a href="#" class="breadcrumbs__link _icon-chevron"><span>Affitto</span></a>
+											</li>
+											<li class="breadcrumbs__item">
+												<span class="breadcrumbs__link breadcrumbs__link--current _icon-chevron">Quadrato monolocale</span>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<a href="#" aria-label="Share link" class="main-details__share share-btn _icon-share"></a>
+						</div>
+						<div class="main-details__tags">
+							<div class="tag tag--lg tag--light">In vetrina</div>
+							<div class="tag tag--lg tag--dark">Vendita</div>
+							<div class="tag tag--lg tag--dark">Novita</div>
+						</div>
+						<div class="main-details__info-body text-light">
+							<h1 class="main-details__title main-title">Appartamento Bordighera</h1>
+							<div class="main-details__price main-title">750€/mese</div>
+							<div class="main-details__location location-point _icon-location-point">Corso Italia 180, 18012 Bordighera</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="page__description description section-padding">
+				<div class="description__container">
+					<h2 class="description__title main-title section-title text-center">Descrizione</h2>
+					<div class="description__body">
+						<div class="description__content content-description">
+							<div class="content-description__text">
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+							</div>
+						</div>
+						<div class="description__aside description-aside">
+							<ul class="description-aside__list">
+								<li class="description-aside__item">
+									<div class="description-aside__icon">
+										<img class="img" width="38" height="38" loading="lazy" decoding="async" src="img/icons/bedroom.svg" alt="bedroom icon">
+									</div>
+									<div class="description-aside__title">Camera da letto <span>1</span></div>
+								</li>
+								<li class="description-aside__item">
+									<div class="description-aside__icon">
+										<img class="img" width="38" height="38" loading="lazy" decoding="async" src="img/icons/bathroom.svg" alt="bathroom icon">
+									</div>
+									<div class="description-aside__title">Bagno <span>1</span></div>
+								</li>
+								<li class="description-aside__item">
+									<div class="description-aside__icon">
+										<img class="img" width="38" height="38" loading="lazy" decoding="async" src="img/icons/house.svg" alt="house icon">
+									</div>
+									<div class="description-aside__title">Superficie <span>46 m²</span></div>
+								</li>
+								<li class="description-aside__item">
+									<div class="description-aside__icon">
+										<img class="img" width="38" height="38" loading="lazy" decoding="async" src="img/icons/calendar.svg" alt="calendar icon">
+									</div>
+									<div class="description-aside__title">Anno di costruzione <span>2008</span></div>
+								</li>
+								<li class="description-aside__item">
+									<div class="description-aside__icon">
+										<img class="img" width="38" height="38" loading="lazy" decoding="async" src="img/icons/garage.svg" alt="garage icon">
+									</div>
+									<div class="description-aside__title">Garage <span>1</span></div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="page__location location-map section-padding section-bg-gray">
+				<div class="location-map__container">
+					<div class="location-map__head section-title">
+						<h2 class="location-map__title main-title text-center">Indirizzo</h2>
+						<h3 class="location-map__sub-title sub-title text-gray text-center">Corso Italia 180, 18012 Bordighera</h3>
+					</div>
+					<div class="location-map__map">
+						<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d26757.06808736472!2d12.50060725697305!3d41.90538096705599!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1suk!2sua!4v1746814262521!5m2!1suk!2sua" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+					</div>
+				</div>
+			</section>
+			<section data-slider="gallery" class="page__gallery gallery section-padding">
+				<div class="gallery__container">
+					<h2 class="gallery__title main-title section-title text-center">Foto</h2>
+					<div data-slider class="gallery__slider swiper">
+						<div class="gallery__wrapper swiper-wrapper">
+							<div class="gallery__slide swiper-slide">
+								<a href="img/gallery/01.jpg" data-fancybox="gallery" class="gallery-img-ibg">
+									<picture><source srcset="img/gallery/01.webp" type="image/webp"><img width="497" height="314" loading="lazy" decoding="async" src="img/gallery/01.jpg" alt="gallery 01"></picture>
+								</a>
+							</div>
+							<div class="gallery__slide swiper-slide">
+								<a href="img/gallery/02.jpg" data-fancybox="gallery" class="gallery-img-ibg">
+									<picture><source srcset="img/gallery/02.webp" type="image/webp"><img width="497" height="314" loading="lazy" decoding="async" src="img/gallery/02.jpg" alt="gallery 02"></picture>
+								</a>
+							</div>
+							<div class="gallery__slide swiper-slide">
+								<a href="img/gallery/03.jpg" data-fancybox="gallery" class="gallery-img-ibg">
+									<picture><source srcset="img/gallery/03.webp" type="image/webp"><img width="497" height="314" loading="lazy" decoding="async" src="img/gallery/03.jpg" alt="gallery 03"></picture>
+								</a>
+							</div>
+							<div class="gallery__slide swiper-slide">
+								<a href="img/gallery/04.jpg" data-fancybox="gallery" class="gallery-img-ibg">
+									<picture><source srcset="img/gallery/04.webp" type="image/webp"><img width="497" height="314" loading="lazy" decoding="async" src="img/gallery/04.jpg" alt="gallery 04"></picture>
+								</a>
+							</div>
+							<div class="gallery__slide swiper-slide">
+								<a href="img/gallery/01.jpg" data-fancybox="gallery" class="gallery-img-ibg">
+									<picture><source srcset="img/gallery/01.webp" type="image/webp"><img width="497" height="314" loading="lazy" decoding="async" src="img/gallery/01.jpg" alt="gallery 05"></picture>
+								</a>
+							</div>
+							<div class="gallery__slide swiper-slide">
+								<a href="img/gallery/02.jpg" data-fancybox="gallery" class="gallery-img-ibg">
+									<picture><source srcset="img/gallery/02.webp" type="image/webp"><img width="497" height="314" loading="lazy" decoding="async" src="img/gallery/02.jpg" alt="gallery 06"></picture>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div data-slider-pagination class="gallery__pagination slider-pagination"></div>
+				</div>
+			</section>
+			<section class="page__details details">
+				<div class="details__container">
+					<div class="details__column text-light section-padding">
+						<h2 class="details__title main-title text-center section-title">Caratteristiche</h2>
+						<ul class="details__info-points info-points">
+							<li class="info-points__item info-point _icon-check-point">Antifurto</li>
+							<li class="info-points__item info-point _icon-check-point">Lavanderia comune</li>
+							<li class="info-points__item info-point _icon-check-point">Aria condizionata</li>
+							<li class="info-points__item info-point _icon-check-point">Palestra</li>
+							<li class="info-points__item info-point _icon-check-point">Ascensore</li>
+							<li class="info-points__item info-point _icon-check-point">Parabola satellitare</li>
+							<li class="info-points__item info-point _icon-check-point">Contesto Artistico</li>
+							<li class="info-points__item info-point _icon-check-point">Vista città</li>
+							<li class="info-points__item info-point _icon-check-point">Custode</li>
+							<li class="info-points__item info-point _icon-check-point">Wi-Fi</li>
+							<li class="info-points__item info-point _icon-check-point">Domotica</li>
+						</ul>
+					</div>
+					<div class="details__column section-padding">
+						<h2 class="details__title main-title text-center section-title">Dettagli aggiuntivi</h2>
+						<ul class="details__table-points table-points">
+							<li class="table-points__item">
+								<span>Anno di costruzione:</span>
+								2008
+							</li>
+							<li class="table-points__item">
+								<span>Consegna:</span>
+								Ammobiliato
+							</li>
+							<li class="table-points__item">
+								<span>Posti letto totali:</span>
+								2
+							</li>
+							<li class="table-points__item">
+								<span>Locazione minima:</span>
+								12 mesi
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer class="footer section-bg-color">
+			<div class="footer__container section-padding">
+				<div class="footer__body footer-body">
+					<a href="#" class="footer-body__logo logo">
+						<picture><source srcset="img/logo/logo.webp, img/logo/logo@2x.webp 2x" type="image/webp"><img class="img" width="132" height="45" fetchpriority="high" loading="eager" decoding="async" src="img/logo/logo.png" srcset="img/logo/logo@2x.png 2x" alt="Logo Conli"></picture>
+					</a>
+					<nav class="footer-body__menu footer-menu">
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item">
+								<a href="#" class="footer-menu__link">Home</a>
+							</li>
+							<li class="footer-menu__item">
+								<a href="#" class="footer-menu__link">Contatti</a>
+							</li>
+							<li class="footer-menu__item">
+								<a href="#" class="footer-menu__link">Vendite</a>
+							</li>
+							<li class="footer-menu__item">
+								<a href="#" class="footer-menu__link">Privacy</a>
+							</li>
+							<li class="footer-menu__item">
+								<a href="#" class="footer-menu__link">Affitti</a>
+							</li>
+							<li class="footer-menu__item">
+								<a href="#" class="footer-menu__link">Cookies</a>
+							</li>
+						</ul>
+					</nav>
+					<div data-da=".footer__contacts, 991.98, last" class="footer-body__text text-gray">Copyright 2025 Immobiliare Conti - Associata F.I.M.A.A</div>
+				</div>
+				<div class="footer__contacts">
+					<ul class="contacts">
+						<li class="contacts__item">
+							<a href="#" class="contacts__link _icon-location"><span>Corso Italia, 2 Bordighera (IM)</span></a>
+						</li>
+						<li class="contacts__item">
+							<a href="tel:+390184260475" class="contacts__link _icon-phone">Tel. <span>+39 0184 26.04.75</span></a>
+						</li>
+						<li class="contacts__item">
+							<a href="mailto:info@immobiliareconti.net" class="contacts__link _icon-mail"><span>info@immobiliareconti.net</span></a>
+						</li>
+						<li class="contacts__item">
+							<div class="contacts__info _icon-time">
+								<div class="contacts__schedule">
+									<p>
+										Vi aspettiamo nel nostro ufficio aperto tutti i giorni feriali dalle <span>9:00</span> alle <span>12:30</span> e dalle <span>15:00</span> alle <span>19:00</span>
+									</p>
+									<p>
+										Domenica mattina dalle <span>9:30</span> alle <span>12:00</span>
+									</p>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<script async src="js/main.min.js?_v=20250510004617"></script>
+</body>
+
+</html>

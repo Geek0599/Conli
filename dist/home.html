@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Homepage</title>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="preload" href="./fonts/Lato-Light.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="./fonts/Lato-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="./fonts/Lato-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="./fonts/Lato-Semibold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="./fonts/Lato-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="./fonts/icons.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="css/main.min.css" as="style" crossorigin="anonymous">
+	<style>
+		@font-face {
+			font-family: "icons";
+			font-display: swap;
+			src: url("./fonts/icons.woff2") format("woff2");
+			font-weight: 400;
+			font-style: normal;
+		}
+
+		@font-face {
+			font-family: "Lato";
+			font-display: swap;
+			src: url("./fonts/Lato-Light.woff2") format("woff2");
+			font-weight: 300;
+			font-style: normal;
+		}
+
+		@font-face {
+			font-family: "Lato";
+			font-display: swap;
+			src: url("./fonts/Lato-Regular.woff2") format("woff2");
+			font-weight: 400;
+			font-style: normal;
+		}
+
+		@font-face {
+			font-family: "Lato";
+			font-display: swap;
+			src: url("./fonts/Lato-Medium.woff2") format("woff2");
+			font-weight: 500;
+			font-style: normal;
+		}
+
+		@font-face {
+			font-family: "Lato";
+			font-display: swap;
+			src: url("./fonts/Lato-Semibold.woff2") format("woff2");
+			font-weight: 600;
+			font-style: normal;
+		}
+
+		@font-face {
+			font-family: "Lato";
+			font-display: swap;
+			src: url("./fonts/Lato-Bold.woff2") format("woff2");
+			font-weight: 700;
+			font-style: normal;
+		}
+	</style>
+	<link rel="stylesheet" href="css/main.min.css?_v=20250510004617">
+	<link rel="preload" href="undefined" as="script">
+	<link rel='preload' fetchpriority='high' as='image' href='img/main/01.jpg' type='image/jpg'>
+
+	<link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+	<meta name="apple-mobile-web-app-title" content="Conli">
+	<link rel="manifest" href="site.webmanifest">
+</head>
+
+<body>
+	<div class="wrapper">
+		<header class="header">
+			<div class="header__wrapper">
+				<div class="header__container">
+					<div class="header__body">
+						<a href="#" class="header__logo logo">
+							<picture><source srcset="img/logo/logo.webp, img/logo/logo@2x.webp 2x" type="image/webp"><img class="img" width="132" height="45" fetchpriority="high" loading="eager" decoding="async" src="img/logo/logo.png" srcset="img/logo/logo@2x.png 2x" alt="Logo Conli"></picture>
+						</a>
+						<div class="header__menu menu">
+							<nav class="menu__body">
+								<ul class="menu__list">
+									<li class="menu__item"><a href="#" class="menu__link _active">Home</a></li>
+									<li class="menu__item"><a href="#" class="menu__link">Affitti</a></li>
+									<li class="menu__item"><a href="#" class="menu__link">Vendite</a></li>
+									<li class="menu__item"><a href="#" class="menu__link">Contatti</a></li>
+								</ul>
+							</nav>
+						</div>
+						<div class="header__actions">
+							<div class="header__btn-lang lang">
+								<button data-toggle class="lang__btn lang-btn">
+									<span class="lang-btn__title">IT</span>
+									<i class="lang-btn__btn-icon _icon-chevron-down"></i>
+								</button>
+								<div data-toggle-content class="lang__dropdown">
+									<ul class="lang__list scrollbar">
+										<li class="lang__item">
+											<a href="#" class="lang__link">
+												ENG
+											</a>
+										</li>
+										<li class="lang__item">
+											<a href="#" class="lang__link">
+												ESP
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<button type="button" aria-label="Menu icon" class="header__icon icon-menu"><span></span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<main class="page">
+			<div data-slider="main-slider" class="page__main-slider main-slider">
+				<div data-slider class="main-slider__slider swiper">
+					<div class="main-slider__pagination">
+						<div class="main-slider__container-pagination">
+							<div data-slider-pagination class="main-slider__pagination-line"></div>
+						</div>
+					</div>
+					<div class="main-slider__wrapper swiper-wrapper">
+						<div class="main-slider__slide swiper-slide">
+							<div class="main-slide">
+								<div class="main-slide__img-ibg">
+									<picture><source srcset="img/main/01.webp" type="image/webp"><img data-parallax width="1440" height="694" fetchpriority="high" loading="eager" decoding="async" src="img/main/01.jpg" alt="product 01"></picture>
+
+								</div>
+								<div class="main-slide__container">
+									<div class="main-slide__content slide-card" data-swiper-parallax-x="-100%" data-swiper-parallax-opacity="0">
+										<a href="#" class="slide-card__title title">Quadrato trilocale</a>
+										<div class="slide-card__value title-small text-red">100 m²</div>
+										<div class="slide-card__text">
+											Il TRILOCALE è composto da due camere da letto alle estremità e la zona giorno al Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, quos?
+										</div>
+										<a href="#" aria-label="Open product" class="slide-card__btn arrow-btn _icon-arrow"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="main-slider__slide swiper-slide">
+							<div class="main-slide">
+								<div class="main-slide__img-ibg">
+									<picture><source srcset="img/main/02.webp" type="image/webp"><img data-parallax width="1440" height="694" loading="lazy" decoding="async" src="img/main/02.jpg" alt="product 02"></picture>
+
+								</div>
+								<div class="main-slide__container">
+									<div class="main-slide__content slide-card" data-swiper-parallax-x="-100%" data-swiper-parallax-opacity="0">
+										<a href="#" class="slide-card__title title">Quadrato trilocale</a>
+										<div class="slide-card__value title-small text-red">120 m²</div>
+										<div class="slide-card__text">
+											Il TRILOCALE è composto da due camere da letto alle estremità e la zona giorno al Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, quos?
+										</div>
+										<a href="#" aria-label="Open product" class="slide-card__btn arrow-btn _icon-arrow"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="main-slider__slide swiper-slide">
+							<div class="main-slide">
+								<div class="main-slide__img-ibg">
+									<picture><source srcset="img/main/03.webp" type="image/webp"><img data-parallax width="1440" height="694" loading="lazy" decoding="async" src="img/main/03.jpg" alt="product 03"></picture>
+
+								</div>
+								<div class="main-slide__container">
+									<div class="main-slide__content slide-card" data-swiper-parallax-x="-100%" data-swiper-parallax-opacity="0">
+										<a href="#" class="slide-card__title title">Quadrato trilocale Quadrato trilocale</a>
+										<div class="slide-card__value title-small text-red">72 m²</div>
+										<div class="slide-card__text">
+											Il TRILOCALE è composto da due camere da letto alle estremità e la zona giorno al Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, quos?
+										</div>
+										<a href="#" aria-label="Open product" class="slide-card__btn arrow-btn _icon-arrow"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="main-slider__slide swiper-slide">
+							<div class="main-slide">
+								<div class="main-slide__img-ibg">
+									<picture><source srcset="img/main/04.webp" type="image/webp"><img data-parallax width="1440" height="694" loading="lazy" decoding="async" src="img/main/04.jpg" alt="product 04"></picture>
+
+								</div>
+								<div class="main-slide__container">
+									<div class="main-slide__content slide-card" data-swiper-parallax-x="-100%" data-swiper-parallax-opacity="0">
+										<a href="#" class="slide-card__title title">Quadrato trilocale</a>
+										<div class="slide-card__value title-small text-red">250 m²</div>
+										<div class="slide-card__text">
+											Il TRILOCALE è composto da due camere da letto alle estremità e la zona giorno al Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, quos?
+										</div>
+										<a href="#" aria-label="Open product" class="slide-card__btn arrow-btn _icon-arrow"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="main-slider__slide swiper-slide">
+							<div class="main-slide">
+								<div class="main-slide__img-ibg">
+									<picture><source srcset="img/main/05.webp" type="image/webp"><img data-parallax width="1440" height="694" loading="lazy" decoding="async" src="img/main/05.jpg" alt="product 05"></picture>
+
+								</div>
+								<div class="main-slide__container">
+									<div class="main-slide__content slide-card" data-swiper-parallax-x="-100%" data-swiper-parallax-opacity="0">
+										<a href="#" class="slide-card__title title">Quadrato trilocale</a>
+										<div class="slide-card__value title-small text-red">250 m²</div>
+										<div class="slide-card__text">
+											Il TRILOCALE è composto da due camere da letto
+										</div>
+										<a href="#" aria-label="Open product" class="slide-card__btn arrow-btn _icon-arrow"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="main-slider__slide swiper-slide">
+							<div class="main-slide">
+								<div class="main-slide__img-ibg">
+									<picture><source srcset="img/main/06.webp" type="image/webp"><img data-parallax width="1440" height="694" loading="lazy" decoding="async" src="img/main/06.jpg" alt="product 06"></picture>
+
+								</div>
+								<div class="main-slide__container">
+									<div class="main-slide__content slide-card" data-swiper-parallax-x="-100%" data-swiper-parallax-opacity="0">
+										<a href="#" class="slide-card__title title">Lorem ipsum dolor sit amet.</a>
+										<div class="slide-card__value title-small text-red">148 m²</div>
+										<div class="slide-card__text">
+											Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque quis qui nostrum debitis ea omnis illo, labore, deleniti mollitia enim porro? Aliquam itaque illum sunt. Sapiente exercitationem hic officiis iste.
+										</div>
+										<a href="#" aria-label="Open product" class="slide-card__btn arrow-btn _icon-arrow"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="page__search-tags search-tags section-padding">
+				<div class="search-tags__container">
+					<form action="#" class="search-tags__items">
+						<div class="search-tags__item form-item _icon-search">
+							<input name="query" value="" type="text" placeholder="Inserisci una parola chiave per la ricerca..." class="form-item__input input">
+						</div>
+						<div class="search-tags__item form-item _icon-double-chevron">
+							<select name="sale-rent" class="form-item__input input">
+								<option disabled value="" selected>Vendita / Affitto</option>
+								<option value="Option #1">Option #1</option>
+								<option value="Option #2">Option #2</option>
+								<option value="Option #2">Option #3</option>
+							</select>
+						</div>
+						<div class="search-tags__item form-item _icon-double-chevron">
+							<select name="type" class="form-item__input input">
+								<option disabled value="" selected>Tipologia</option>
+								<option value="Option #1">Option #1</option>
+								<option value="Option #2">Option #2</option>
+								<option value="Option #2">Option #3</option>
+							</select>
+						</div>
+						<div class="search-tags__item form-item _icon-double-chevron">
+							<select name="local" class="form-item__input input">
+								<option disabled value="" selected>Locali</option>
+								<option value="Option #1">Option #1</option>
+								<option value="Option #2">Option #2</option>
+								<option value="Option #2">Option #3</option>
+							</select>
+						</div>
+						<div class="search-tags__item form-item _icon-double-chevron">
+							<select name="bedroom" class="form-item__input input">
+								<option disabled value="" selected>Camere da letto</option>
+								<option value="Option #1">Option #1</option>
+								<option value="Option #2">Option #2</option>
+								<option value="Option #2">Option #3</option>
+							</select>
+						</div>
+						<div class="search-tags__item form-item _icon-double-chevron">
+							<select name="bathrooms" class="form-item__input input">
+								<option disabled value="" selected>Bagni</option>
+								<option value="Option #1">Option #1</option>
+								<option value="Option #2">Option #2</option>
+								<option value="Option #2">Option #3</option>
+							</select>
+						</div>
+						<div class="search-tags__item form-item">
+							<input data-number-format name="minimum-area" type="text" placeholder="Superficie minima" class="form-item__input input">
+						</div>
+						<div class="search-tags__item form-item">
+							<input data-number-format name="maximum-area" type="text" placeholder="Superficie massima" class="form-item__input input">
+						</div>
+						<div class="search-tags__item form-item _icon-double-chevron">
+							<select name="min-price" class="form-item__input input">
+								<option disabled selected value="">Prezzo minimo</option>
+								<option value="Option #1">Option #1</option>
+								<option value="Option #2">Option #2</option>
+								<option value="Option #2">Option #3</option>
+							</select>
+						</div>
+						<div class="search-tags__item form-item _icon-double-chevron">
+							<select name="max-price" class="form-item__input input">
+								<option disabled selected value="">Prezzo massimo</option>
+								<option value="Option #1">Option #1</option>
+								<option value="Option #2">Option #2</option>
+								<option value="Option #2">Option #3</option>
+							</select>
+						</div>
+						<div class="search-tags__item">
+							<button type="submit" class="search-tags__submit-btn btn btn-bg">Cerca</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<section class="page__bg section-bg" data-parallax-section>
+				<div class="section-bg__bg-ibg" data-parallax-img>
+					<picture><source srcset="img/backgrounds/section-bg.webp" type="image/webp"><img width="1440" height="620" loading="lazy" decoding="async" src="img/backgrounds/section-bg.jpg" alt="section-bg"></picture>
+				</div>
+				<div class="section-bg__container" data-parallax-padding>
+					<h2 class="section-bg__title title-large text-light"><span>Testi di esempio modificabile.</span> <br> Conti, agenzia associata F.I.M.A.A. (Federazione Italiana Mediatori Agenti d'Affari) opera sul mercato immobiliare dal 1955 e mette a disposizione tutta l'esperienza maturata, garantendo affidabilià e serietà professionale.</h2>
+				</div>
+			</section>
+			<section class="page__product-cards section-padding">
+				<div class="product-cards__container">
+					<h2 class="product-cards__title main-title section-title section-title--lg text-center">La nostra vetrina</h2>
+					<ul class="product-cards__items">
+						<li class="product-cards__item product-card">
+							<div class="product-card__img-body">
+								<a href="#" class="product-card__img-ibg">
+									<picture><source srcset="img/product-cards/01.webp" type="image/webp"><img width="280" height="280" loading="lazy" decoding="async" src="img/product-cards/01.jpg" alt="01"></picture>
+								</a>
+								<div class="product-card__tags product-card__tags--left">
+									<div class="tag tag--light">In vetrina</div>
+								</div>
+								<div class="product-card__tags product-card__tags--right">
+									<div class="tag tag--dark">Vendita</div>
+									<div class="tag tag--dark">Novita</div>
+								</div>
+
+							</div>
+							<div class="product-card__content">
+								<a href="#" class="product-card__title">Quadrato box auto interrati</a>
+								<div class="product-card__price title-small-semi text-red">57.000€</div>
+								<div class="product-card__bottom">
+									<div class="product-card__text text-medium">Dettagli</div>
+									<a href="#" class="product-card__btn arrow-btn arrow-btn--sm _icon-arrow"></a>
+								</div>
+							</div>
+						</li>
+						<li class="product-cards__item product-card">
+							<div class="product-card__img-body">
+								<a href="#" class="product-card__img-ibg">
+									<picture><source srcset="img/product-cards/02.webp" type="image/webp"><img width="280" height="280" loading="lazy" decoding="async" src="img/product-cards/02.jpg" alt="02"></picture>
+								</a>
+								<div class="product-card__tags product-card__tags--left">
+									<div class="tag tag--light">In vetrina</div>
+								</div>
+								<div class="product-card__tags product-card__tags--right">
+									<div class="tag tag--dark">Vendita</div>
+									<div class="tag tag--dark">Novita</div>
+								</div>
+
+							</div>
+							<div class="product-card__content">
+								<a href="#" class="product-card__title">The Number 6 Appartamento 8</a>
+								<div class="product-card__price title-small-semi text-red">1.400.000€/oltre IVA</div>
+								<div class="product-card__bottom">
+									<div class="product-card__text text-medium">Dettagli</div>
+									<a href="#" class="product-card__btn arrow-btn arrow-btn--sm _icon-arrow"></a>
+								</div>
+							</div>
+						</li>
+						<li class="product-cards__item product-card">
+							<div class="product-card__img-body">
+								<a href="#" class="product-card__img-ibg">
+									<picture><source srcset="img/product-cards/03.webp" type="image/webp"><img width="280" height="280" loading="lazy" decoding="async" src="img/product-cards/03.jpg" alt="03"></picture>
+								</a>
+								<div class="product-card__tags product-card__tags--left">
+									<div class="tag tag--light">In vetrina</div>
+								</div>
+								<div class="product-card__tags product-card__tags--right">
+									<div class="tag tag--dark">Vendita</div>
+									<div class="tag tag--dark">Novita</div>
+								</div>
+
+							</div>
+							<div class="product-card__content">
+								<a href="#" class="product-card__title">Buozzi5 Appartamento 2</a>
+								<div class="product-card__price title-small-semi text-red">1.590.000€</div>
+								<div class="product-card__bottom">
+									<div class="product-card__text text-medium">Dettagli</div>
+									<a href="#" class="product-card__btn arrow-btn arrow-btn--sm _icon-arrow"></a>
+								</div>
+							</div>
+						</li>
+						<li class="product-cards__item product-card">
+							<div class="product-card__img-body">
+								<a href="#" class="product-card__img-ibg">
+									<picture><source srcset="img/product-cards/04.webp" type="image/webp"><img width="280" height="280" loading="lazy" decoding="async" src="img/product-cards/04.jpg" alt="04"></picture>
+								</a>
+								<div class="product-card__tags product-card__tags--left">
+									<div class="tag tag--light">In vetrina</div>
+								</div>
+								<div class="product-card__tags product-card__tags--right">
+									<div class="tag tag--dark">Vendita</div>
+									<div class="tag tag--dark">Novita</div>
+								</div>
+
+							</div>
+							<div class="product-card__content">
+								<a href="#" class="product-card__title">Building Center 4 Lotto B6</a>
+								<div class="product-card__price title-small-semi text-red">5.000€/mese</div>
+								<div class="product-card__bottom">
+									<div class="product-card__text text-medium">Dettagli</div>
+									<a href="#" class="product-card__btn arrow-btn arrow-btn--sm _icon-arrow"></a>
+								</div>
+							</div>
+						</li>
+						<li class="product-cards__item product-card">
+							<div class="product-card__img-body">
+								<a href="#" class="product-card__img-ibg">
+									<picture><source srcset="img/product-cards/05.webp" type="image/webp"><img width="280" height="280" loading="lazy" decoding="async" src="img/product-cards/05.jpg" alt="05"></picture>
+								</a>
+								<div class="product-card__tags product-card__tags--left">
+									<div class="tag tag--light">In vetrina</div>
+								</div>
+								<div class="product-card__tags product-card__tags--right">
+									<div class="tag tag--dark">Vendita</div>
+									<div class="tag tag--dark">Novita</div>
+								</div>
+
+							</div>
+							<div class="product-card__content">
+								<a href="#" class="product-card__title">Quadrato monolocale</a>
+								<div class="product-card__price title-small-semi text-red">750€/mese</div>
+								<div class="product-card__bottom">
+									<div class="product-card__text text-medium">Dettagli</div>
+									<a href="#" class="product-card__btn arrow-btn arrow-btn--sm _icon-arrow"></a>
+								</div>
+							</div>
+						</li>
+						<li class="product-cards__item product-card">
+							<div class="product-card__img-body">
+								<a href="#" class="product-card__img-ibg">
+									<picture><source srcset="img/product-cards/06.webp" type="image/webp"><img width="280" height="280" loading="lazy" decoding="async" src="img/product-cards/06.jpg" alt="06"></picture>
+								</a>
+								<div class="product-card__tags product-card__tags--left">
+									<div class="tag tag--light">In vetrina</div>
+								</div>
+								<div class="product-card__tags product-card__tags--right">
+									<div class="tag tag--dark">Vendita</div>
+									<div class="tag tag--dark">Novita</div>
+								</div>
+
+							</div>
+							<div class="product-card__content">
+								<a href="#" class="product-card__title">Quadrato trilocale</a>
+								<div class="product-card__price title-small-semi text-red">57.1.850€/mese€</div>
+								<div class="product-card__bottom">
+									<div class="product-card__text text-medium">Dettagli</div>
+									<a href="#" class="product-card__btn arrow-btn arrow-btn--sm _icon-arrow"></a>
+								</div>
+							</div>
+						</li>
+						<li class="product-cards__item product-card">
+							<div class="product-card__img-body">
+								<a href="#" class="product-card__img-ibg">
+									<picture><source srcset="img/product-cards/07.webp" type="image/webp"><img width="280" height="280" loading="lazy" decoding="async" src="img/product-cards/07.jpg" alt="07"></picture>
+								</a>
+								<div class="product-card__tags product-card__tags--left">
+									<div class="tag tag--light">In vetrina</div>
+								</div>
+								<div class="product-card__tags product-card__tags--right">
+									<div class="tag tag--dark">Vendita</div>
+									<div class="tag tag--dark">Novita</div>
+								</div>
+
+							</div>
+							<div class="product-card__content">
+								<a href="#" class="product-card__title">Quadrato box auto interrati</a>
+								<div class="product-card__price title-small-semi text-red">57.000€</div>
+								<div class="product-card__bottom">
+									<div class="product-card__text text-medium">Dettagli</div>
+									<a href="#" class="product-card__btn arrow-btn arrow-btn--sm _icon-arrow"></a>
+								</div>
+							</div>
+						</li>
+						<li class="product-cards__item product-card">
+							<div class="product-card__img-body">
+								<a href="#" class="product-card__img-ibg">
+									<picture><source srcset="img/product-cards/08.webp" type="image/webp"><img width="280" height="280" loading="lazy" decoding="async" src="img/product-cards/08.jpg" alt="08"></picture>
+								</a>
+								<div class="product-card__tags product-card__tags--left">
+									<div class="tag tag--light">In vetrina</div>
+								</div>
+								<div class="product-card__tags product-card__tags--right">
+									<div class="tag tag--dark">Vendita</div>
+									<div class="tag tag--dark">Novita</div>
+								</div>
+							</div>
+							<div class="product-card__content">
+								<a href="#" class="product-card__title">The Number 6 Appartamento 8</a>
+								<div class="product-card__price title-small-semi text-red">1.400.000€/oltre IVA</div>
+								<div class="product-card__bottom">
+									<div class="product-card__text text-medium">Dettagli</div>
+									<a href="#" class="product-card__btn arrow-btn arrow-btn--sm _icon-arrow"></a>
+								</div>
+							</div>
+						</li>
+					</ul>
+					<div class="product-cards__pagination pagination">
+						<div class="pagination__container pagination__container--no-padding">
+							<ul class="pagination__list">
+								<li class="pagination__item">
+									<div class="pagination__link _active">1</div>
+								</li>
+								<li class="pagination__item">
+									<a href="#" class="pagination__link">2</a>
+								</li>
+								<li class="pagination__item">
+									<a href="#" class="pagination__link">3</a>
+								</li>
+								<li class="pagination__item">
+									<a href="#" class="pagination__link">4</a>
+								</li>
+								<li class="pagination__item">
+									<a href="#" class="pagination__link">5</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="product-cards__actions actions">
+						<div class="actions__container actions__container--no-padding">
+							<a href="#" class="actions__btn btn btn-bg">I nostri affitti</a>
+							<a href="#" class="actions__btn btn btn-border-dark">Le nostre vendite</a>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="page__make-request">
+				<div class="make-request__wrapper section-bg-dark section-padding">
+					<div class="make-request__container">
+						<div class="make-request__content content-make-request text-light">
+							<h2 class="content-make-request__title main-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h2>
+							<div class="content-make-request__text">
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla </p>
+							</div>
+						</div>
+						<div class="make-request__form form-make-request text-light">
+							<h3 class="form-make-request__title title">Contattaci compilando il form:</h3>
+							<form data-validate action="#" class="form-make-request__form">
+								<div class="form-make-request__items">
+									<div class="form-make-request__item form-item">
+										<input required data-text-format data-minlength="2" name="name" value="" type="text" placeholder="Nome*" class="form-item__input input">
+									</div>
+									<div class="form-make-request__item form-item">
+										<input required data-text-format data-minlength="2" name="surname" value="" type="text" placeholder="Cognome*" class="form-item__input input">
+									</div>
+									<div class="form-make-request__item form-item">
+										<input required name="email" value="" type="email" placeholder="Email*" class="form-item__input input">
+									</div>
+									<div class="form-make-request__item form-make-request__item--textarea form-item">
+										<textarea name="message" placeholder="Messaggio" class="form-item__input input"></textarea>
+									</div>
+									<div class="form-make-request__item recaptcha">
+										<picture><source srcset="img/backgrounds/recaptcha.webp" type="image/webp"><img class="img recaptcha" width="280" height="60" loading="lazy" decoding="async" src="img/backgrounds/recaptcha.png" alt="recaptcha"></picture>
+									</div>
+								</div>
+								<div class="form-make-request__actions">
+									<div class="form-make-request__policy policy checkbox-item">
+										<div class="policy__title text-bold">Privacy Policy</div>
+										<div class="policy__action">
+											<input required id="cb-1" name="accept_privacy-policy" value="true" type="checkbox">
+											<label class="text-fw-light" for="cb-1">Sono maggiorenne, ho letto e accetto la Privacy Policy</label>
+										</div>
+									</div>
+									<button type="submit" class="form-make-request__btn btn btn-border-light">Invia</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer class="footer section-bg-color">
+			<div class="footer__container section-padding">
+				<div class="footer__body footer-body">
+					<a href="#" class="footer-body__logo logo">
+						<picture><source srcset="img/logo/logo.webp, img/logo/logo@2x.webp 2x" type="image/webp"><img class="img" width="132" height="45" fetchpriority="high" loading="eager" decoding="async" src="img/logo/logo.png" srcset="img/logo/logo@2x.png 2x" alt="Logo Conli"></picture>
+					</a>
+					<nav class="footer-body__menu footer-menu">
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item">
+								<a href="#" class="footer-menu__link">Home</a>
+							</li>
+							<li class="footer-menu__item">
+								<a href="#" class="footer-menu__link">Contatti</a>
+							</li>
+							<li class="footer-menu__item">
+								<a href="#" class="footer-menu__link">Vendite</a>
+							</li>
+							<li class="footer-menu__item">
+								<a href="#" class="footer-menu__link">Privacy</a>
+							</li>
+							<li class="footer-menu__item">
+								<a href="#" class="footer-menu__link">Affitti</a>
+							</li>
+							<li class="footer-menu__item">
+								<a href="#" class="footer-menu__link">Cookies</a>
+							</li>
+						</ul>
+					</nav>
+					<div data-da=".footer__contacts, 991.98, last" class="footer-body__text text-gray">Copyright 2025 Immobiliare Conti - Associata F.I.M.A.A</div>
+				</div>
+				<div class="footer__contacts">
+					<ul class="contacts">
+						<li class="contacts__item">
+							<a href="#" class="contacts__link _icon-location"><span>Corso Italia, 2 Bordighera (IM)</span></a>
+						</li>
+						<li class="contacts__item">
+							<a href="tel:+390184260475" class="contacts__link _icon-phone">Tel. <span>+39 0184 26.04.75</span></a>
+						</li>
+						<li class="contacts__item">
+							<a href="mailto:info@immobiliareconti.net" class="contacts__link _icon-mail"><span>info@immobiliareconti.net</span></a>
+						</li>
+						<li class="contacts__item">
+							<div class="contacts__info _icon-time">
+								<div class="contacts__schedule">
+									<p>
+										Vi aspettiamo nel nostro ufficio aperto tutti i giorni feriali dalle <span>9:00</span> alle <span>12:30</span> e dalle <span>15:00</span> alle <span>19:00</span>
+									</p>
+									<p>
+										Domenica mattina dalle <span>9:30</span> alle <span>12:00</span>
+									</p>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<script async src="js/main.min.js?_v=20250510004617"></script>
+</body>
+
+</html>
