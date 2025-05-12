@@ -3509,10 +3509,10 @@ body {
       -ms-flex-positive: 1;
           flex-grow: 1;
   position: relative;
-  -webkit-transition: flex-grow 1s ease, -webkit-box-flex 1s ease;
-  transition: flex-grow 1s ease, -webkit-box-flex 1s ease;
-  transition: flex-grow 1s ease;
-  transition: flex-grow 1s ease, -webkit-box-flex 1s ease, -ms-flex-positive 1s ease;
+  -webkit-transition: flex-grow 0.9s ease, -webkit-box-flex 0.9s ease;
+  transition: flex-grow 0.9s ease, -webkit-box-flex 0.9s ease;
+  transition: flex-grow 0.9s ease;
+  transition: flex-grow 0.9s ease, -webkit-box-flex 0.9s ease, -ms-flex-positive 0.9s ease;
 }
 
 .main-slider__pagination-line .swiper-pagination-bullet::before {
