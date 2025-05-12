@@ -3509,10 +3509,10 @@ body {
       -ms-flex-positive: 1;
           flex-grow: 1;
   position: relative;
-  -webkit-transition: flex-grow 0.3s ease, -webkit-box-flex 0.3s ease;
-  transition: flex-grow 0.3s ease, -webkit-box-flex 0.3s ease;
-  transition: flex-grow 0.3s ease;
-  transition: flex-grow 0.3s ease, -webkit-box-flex 0.3s ease, -ms-flex-positive 0.3s ease;
+  -webkit-transition: flex-grow 1s ease, -webkit-box-flex 1s ease;
+  transition: flex-grow 1s ease, -webkit-box-flex 1s ease;
+  transition: flex-grow 1s ease;
+  transition: flex-grow 1s ease, -webkit-box-flex 1s ease, -ms-flex-positive 1s ease;
 }
 
 .main-slider__pagination-line .swiper-pagination-bullet::before {
@@ -3722,17 +3722,16 @@ body {
   position: relative;
 }
 
-.section-bg__bg-ibg {
+.section-bg__bg {
   overflow: hidden;
   position: absolute;
   width: 100%;
   height: 100%;
   left: 0;
   top: 0;
-  will-change: transform;
 }
 
-.section-bg__bg-ibg::before {
+.section-bg__bg::before {
   content: "";
   position: absolute;
   width: 100%;
@@ -3741,6 +3740,18 @@ body {
   top: 0;
   z-index: 1;
   background-color: rgba(20, 38, 74, 0.4);
+}
+
+.section-bg__bg-inner-ibg {
+  position: absolute;
+  top: 0%;
+  left: 0;
+  right: 0;
+  height: 100%;
+}
+
+.section-bg__bg-inner-ibg img {
+  will-change: transform;
 }
 
 .section-bg__container {

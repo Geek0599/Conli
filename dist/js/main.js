@@ -8295,19 +8295,273 @@
             setTransition(duration);
         }));
     }
+    function Autoplay(_ref) {
+        let {swiper, extendParams, on, emit, params} = _ref;
+        swiper.autoplay = {
+            running: false,
+            paused: false,
+            timeLeft: 0
+        };
+        extendParams({
+            autoplay: {
+                enabled: false,
+                delay: 3e3,
+                waitForTransition: true,
+                disableOnInteraction: false,
+                stopOnLastSlide: false,
+                reverseDirection: false,
+                pauseOnMouseEnter: false
+            }
+        });
+        let timeout;
+        let raf;
+        let autoplayDelayTotal = params && params.autoplay ? params.autoplay.delay : 3e3;
+        let autoplayDelayCurrent = params && params.autoplay ? params.autoplay.delay : 3e3;
+        let autoplayTimeLeft;
+        let autoplayStartTime = (new Date).getTime();
+        let wasPaused;
+        let isTouched;
+        let pausedByTouch;
+        let touchStartTimeout;
+        let slideChanged;
+        let pausedByInteraction;
+        let pausedByPointerEnter;
+        function onTransitionEnd(e) {
+            if (!swiper || swiper.destroyed || !swiper.wrapperEl) return;
+            if (e.target !== swiper.wrapperEl) return;
+            swiper.wrapperEl.removeEventListener("transitionend", onTransitionEnd);
+            if (pausedByPointerEnter) return;
+            resume();
+        }
+        const calcTimeLeft = () => {
+            if (swiper.destroyed || !swiper.autoplay.running) return;
+            if (swiper.autoplay.paused) wasPaused = true; else if (wasPaused) {
+                autoplayDelayCurrent = autoplayTimeLeft;
+                wasPaused = false;
+            }
+            const timeLeft = swiper.autoplay.paused ? autoplayTimeLeft : autoplayStartTime + autoplayDelayCurrent - (new Date).getTime();
+            swiper.autoplay.timeLeft = timeLeft;
+            emit("autoplayTimeLeft", timeLeft, timeLeft / autoplayDelayTotal);
+            raf = requestAnimationFrame((() => {
+                calcTimeLeft();
+            }));
+        };
+        const getSlideDelay = () => {
+            let activeSlideEl;
+            if (swiper.virtual && swiper.params.virtual.enabled) activeSlideEl = swiper.slides.filter((slideEl => slideEl.classList.contains("swiper-slide-active")))[0]; else activeSlideEl = swiper.slides[swiper.activeIndex];
+            if (!activeSlideEl) return;
+            const currentSlideDelay = parseInt(activeSlideEl.getAttribute("data-swiper-autoplay"), 10);
+            return currentSlideDelay;
+        };
+        const run = delayForce => {
+            if (swiper.destroyed || !swiper.autoplay.running) return;
+            cancelAnimationFrame(raf);
+            calcTimeLeft();
+            let delay = typeof delayForce === "undefined" ? swiper.params.autoplay.delay : delayForce;
+            autoplayDelayTotal = swiper.params.autoplay.delay;
+            autoplayDelayCurrent = swiper.params.autoplay.delay;
+            const currentSlideDelay = getSlideDelay();
+            if (!Number.isNaN(currentSlideDelay) && currentSlideDelay > 0 && typeof delayForce === "undefined") {
+                delay = currentSlideDelay;
+                autoplayDelayTotal = currentSlideDelay;
+                autoplayDelayCurrent = currentSlideDelay;
+            }
+            autoplayTimeLeft = delay;
+            const speed = swiper.params.speed;
+            const proceed = () => {
+                if (!swiper || swiper.destroyed) return;
+                if (swiper.params.autoplay.reverseDirection) {
+                    if (!swiper.isBeginning || swiper.params.loop || swiper.params.rewind) {
+                        swiper.slidePrev(speed, true, true);
+                        emit("autoplay");
+                    } else if (!swiper.params.autoplay.stopOnLastSlide) {
+                        swiper.slideTo(swiper.slides.length - 1, speed, true, true);
+                        emit("autoplay");
+                    }
+                } else if (!swiper.isEnd || swiper.params.loop || swiper.params.rewind) {
+                    swiper.slideNext(speed, true, true);
+                    emit("autoplay");
+                } else if (!swiper.params.autoplay.stopOnLastSlide) {
+                    swiper.slideTo(0, speed, true, true);
+                    emit("autoplay");
+                }
+                if (swiper.params.cssMode) {
+                    autoplayStartTime = (new Date).getTime();
+                    requestAnimationFrame((() => {
+                        run();
+                    }));
+                }
+            };
+            if (delay > 0) {
+                clearTimeout(timeout);
+                timeout = setTimeout((() => {
+                    proceed();
+                }), delay);
+            } else requestAnimationFrame((() => {
+                proceed();
+            }));
+            return delay;
+        };
+        const start = () => {
+            autoplayStartTime = (new Date).getTime();
+            swiper.autoplay.running = true;
+            run();
+            emit("autoplayStart");
+        };
+        const stop = () => {
+            swiper.autoplay.running = false;
+            clearTimeout(timeout);
+            cancelAnimationFrame(raf);
+            emit("autoplayStop");
+        };
+        const pause = (internal, reset) => {
+            if (swiper.destroyed || !swiper.autoplay.running) return;
+            clearTimeout(timeout);
+            if (!internal) pausedByInteraction = true;
+            const proceed = () => {
+                emit("autoplayPause");
+                if (swiper.params.autoplay.waitForTransition) swiper.wrapperEl.addEventListener("transitionend", onTransitionEnd); else resume();
+            };
+            swiper.autoplay.paused = true;
+            if (reset) {
+                if (slideChanged) autoplayTimeLeft = swiper.params.autoplay.delay;
+                slideChanged = false;
+                proceed();
+                return;
+            }
+            const delay = autoplayTimeLeft || swiper.params.autoplay.delay;
+            autoplayTimeLeft = delay - ((new Date).getTime() - autoplayStartTime);
+            if (swiper.isEnd && autoplayTimeLeft < 0 && !swiper.params.loop) return;
+            if (autoplayTimeLeft < 0) autoplayTimeLeft = 0;
+            proceed();
+        };
+        const resume = () => {
+            if (swiper.isEnd && autoplayTimeLeft < 0 && !swiper.params.loop || swiper.destroyed || !swiper.autoplay.running) return;
+            autoplayStartTime = (new Date).getTime();
+            if (pausedByInteraction) {
+                pausedByInteraction = false;
+                run(autoplayTimeLeft);
+            } else run();
+            swiper.autoplay.paused = false;
+            emit("autoplayResume");
+        };
+        const onVisibilityChange = () => {
+            if (swiper.destroyed || !swiper.autoplay.running) return;
+            const document = ssr_window_esm_getDocument();
+            if (document.visibilityState === "hidden") {
+                pausedByInteraction = true;
+                pause(true);
+            }
+            if (document.visibilityState === "visible") resume();
+        };
+        const onPointerEnter = e => {
+            if (e.pointerType !== "mouse") return;
+            pausedByInteraction = true;
+            pausedByPointerEnter = true;
+            if (swiper.animating || swiper.autoplay.paused) return;
+            pause(true);
+        };
+        const onPointerLeave = e => {
+            if (e.pointerType !== "mouse") return;
+            pausedByPointerEnter = false;
+            if (swiper.autoplay.paused) resume();
+        };
+        const attachMouseEvents = () => {
+            if (swiper.params.autoplay.pauseOnMouseEnter) {
+                swiper.el.addEventListener("pointerenter", onPointerEnter);
+                swiper.el.addEventListener("pointerleave", onPointerLeave);
+            }
+        };
+        const detachMouseEvents = () => {
+            swiper.el.removeEventListener("pointerenter", onPointerEnter);
+            swiper.el.removeEventListener("pointerleave", onPointerLeave);
+        };
+        const attachDocumentEvents = () => {
+            const document = ssr_window_esm_getDocument();
+            document.addEventListener("visibilitychange", onVisibilityChange);
+        };
+        const detachDocumentEvents = () => {
+            const document = ssr_window_esm_getDocument();
+            document.removeEventListener("visibilitychange", onVisibilityChange);
+        };
+        on("init", (() => {
+            if (swiper.params.autoplay.enabled) {
+                attachMouseEvents();
+                attachDocumentEvents();
+                start();
+            }
+        }));
+        on("destroy", (() => {
+            detachMouseEvents();
+            detachDocumentEvents();
+            if (swiper.autoplay.running) stop();
+        }));
+        on("_freeModeStaticRelease", (() => {
+            if (pausedByTouch || pausedByInteraction) resume();
+        }));
+        on("_freeModeNoMomentumRelease", (() => {
+            if (!swiper.params.autoplay.disableOnInteraction) pause(true, true); else stop();
+        }));
+        on("beforeTransitionStart", ((_s, speed, internal) => {
+            if (swiper.destroyed || !swiper.autoplay.running) return;
+            if (internal || !swiper.params.autoplay.disableOnInteraction) pause(true, true); else stop();
+        }));
+        on("sliderFirstMove", (() => {
+            if (swiper.destroyed || !swiper.autoplay.running) return;
+            if (swiper.params.autoplay.disableOnInteraction) {
+                stop();
+                return;
+            }
+            isTouched = true;
+            pausedByTouch = false;
+            pausedByInteraction = false;
+            touchStartTimeout = setTimeout((() => {
+                pausedByInteraction = true;
+                pausedByTouch = true;
+                pause(true);
+            }), 200);
+        }));
+        on("touchEnd", (() => {
+            if (swiper.destroyed || !swiper.autoplay.running || !isTouched) return;
+            clearTimeout(touchStartTimeout);
+            clearTimeout(timeout);
+            if (swiper.params.autoplay.disableOnInteraction) {
+                pausedByTouch = false;
+                isTouched = false;
+                return;
+            }
+            if (pausedByTouch && swiper.params.cssMode) resume();
+            pausedByTouch = false;
+            isTouched = false;
+        }));
+        on("slideChange", (() => {
+            if (swiper.destroyed || !swiper.autoplay.running) return;
+            slideChanged = true;
+        }));
+        Object.assign(swiper.autoplay, {
+            start,
+            stop,
+            pause,
+            resume
+        });
+    }
     function init_mainSlider() {
         const sliderBlock = document.querySelector('[data-slider="main-slider"]');
         if (sliderBlock) {
             const slider = sliderBlock.querySelector(`[data-slider]`);
             const sliderPagination = sliderBlock.querySelector("[data-slider-pagination]");
             if (slider) new Swiper(slider, {
-                modules: [ Pagination, Parallax ],
+                modules: [ Pagination, Parallax, Autoplay ],
+                autoplay: {
+                    delay: 5e3,
+                    disableOnInteraction: false
+                },
                 observer: true,
                 observeParents: true,
                 slidesPerView: 1,
                 spaceBetween: 0,
                 parallax: true,
-                speed: 800,
+                speed: 1100,
                 lazy: true,
                 pagination: {
                     el: sliderPagination,
@@ -8357,6 +8611,185 @@
         }
     }
     gallerySlider();
+    const simpleParallaxVanilla_es_h = i => NodeList.prototype.isPrototypeOf(i) || HTMLCollection.prototype.isPrototypeOf(i) ? Array.from(i) : typeof i == "string" || i instanceof String ? document.querySelectorAll(i) : [ i ], simpleParallaxVanilla_es_d = () => Element.prototype.closest && "IntersectionObserver" in window;
+    class simpleParallaxVanilla_es_c {
+        constructor() {
+            this.positions = {
+                top: 0,
+                bottom: 0,
+                height: 0
+            };
+        }
+        setViewportTop(t) {
+            return this.positions.top = t ? t.scrollTop : window.pageYOffset, this.positions;
+        }
+        setViewportBottom() {
+            return this.positions.bottom = this.positions.top + this.positions.height, this.positions;
+        }
+        setViewportAll(t) {
+            return this.positions.top = t ? t.scrollTop : window.pageYOffset, this.positions.height = t ? t.clientHeight : document.documentElement.clientHeight, 
+            this.positions.bottom = this.positions.top + this.positions.height, this.positions;
+        }
+    }
+    const simpleParallaxVanilla_es_s = new simpleParallaxVanilla_es_c, simpleParallaxVanilla_es_m = () => {
+        const i = "transform webkitTransform mozTransform oTransform msTransform".split(" ");
+        let t, e = 0;
+        for (;t === void 0; ) t = document.createElement("div").style[i[e]] !== void 0 ? i[e] : void 0, 
+        e += 1;
+        return t;
+    }, simpleParallaxVanilla_es_r = simpleParallaxVanilla_es_m(), simpleParallaxVanilla_es_p = i => i.tagName.toLowerCase() !== "img" && i.tagName.toLowerCase() !== "picture" ? !0 : !(!i || !i.complete || typeof i.naturalWidth < "u" && i.naturalWidth === 0);
+    class simpleParallaxVanilla_es_f {
+        constructor(t, e, n = !1) {
+            this.element = t, this.elementContainer = t, this.settings = e, this.isVisible = !0, 
+            this.isInit = !1, this.oldTranslateValue = -1, this.prefersReducedMotion = n, this.init = this.init.bind(this), 
+            this.customWrapper = this.settings.customWrapper && this.element.closest(this.settings.customWrapper) ? this.element.closest(this.settings.customWrapper) : null, 
+            !this.prefersReducedMotion && (simpleParallaxVanilla_es_p(t) ? this.init() : this.element.addEventListener("load", (() => {
+                setTimeout((() => {
+                    this.init(!0);
+                }), 50);
+            })));
+        }
+        init(t) {
+            this.prefersReducedMotion || this.isInit || (t && (this.rangeMax = null), !this.element.closest(".simpleParallax") && (this.settings.overflow === !1 && this.wrapElement(this.element), 
+            this.setTransformCSS(), this.getElementOffset(), this.intersectionObserver(), this.getTranslateValue(), 
+            this.animate(), this.settings.delay > 0 ? setTimeout((() => {
+                this.setTransitionCSS(), this.elementContainer.classList.add("simple-parallax-initialized");
+            }), 10) : this.elementContainer.classList.add("simple-parallax-initialized"), this.isInit = !0));
+        }
+        wrapElement() {
+            const t = this.element.closest("picture") || this.element;
+            let e = this.customWrapper || document.createElement("div");
+            e.classList.add("simpleParallax"), e.style.overflow = "hidden", this.customWrapper || (t.parentNode.insertBefore(e, t), 
+            e.appendChild(t)), this.elementContainer = e;
+        }
+        unWrapElement() {
+            const t = this.elementContainer;
+            this.customWrapper ? (t.classList.remove("simpleParallax"), t.style.overflow = "") : t.replaceWith(...t.childNodes);
+        }
+        setTransformCSS() {
+            this.settings.overflow === !1 && (this.element.style[simpleParallaxVanilla_es_r] = `scale(${this.settings.scale})`), 
+            this.element.style.willChange = "transform";
+        }
+        setTransitionCSS() {
+            this.element.style.transition = `transform ${this.settings.delay}s ${this.settings.transition}`;
+        }
+        unSetStyle() {
+            this.element.style.willChange = "", this.element.style[simpleParallaxVanilla_es_r] = "", 
+            this.element.style.transition = "";
+        }
+        getElementOffset() {
+            const t = this.elementContainer.getBoundingClientRect();
+            if (this.elementHeight = t.height, this.elementTop = t.top + simpleParallaxVanilla_es_s.positions.top, 
+            this.settings.customContainer) {
+                const e = this.settings.customContainer.getBoundingClientRect();
+                this.elementTop = t.top - e.top + simpleParallaxVanilla_es_s.positions.top;
+            }
+            this.elementBottom = this.elementHeight + this.elementTop;
+        }
+        buildThresholdList() {
+            const t = [];
+            for (let e = 1; e <= this.elementHeight; e++) {
+                const n = e / this.elementHeight;
+                t.push(n);
+            }
+            return t;
+        }
+        intersectionObserver() {
+            const t = {
+                root: null,
+                threshold: this.buildThresholdList()
+            };
+            this.observer = new IntersectionObserver(this.intersectionObserverCallback.bind(this), t), 
+            this.observer.observe(this.element);
+        }
+        intersectionObserverCallback(t) {
+            t.forEach((e => {
+                e.isIntersecting ? this.isVisible = !0 : this.isVisible = !1;
+            }));
+        }
+        checkIfVisible() {
+            return this.elementBottom > simpleParallaxVanilla_es_s.positions.top && this.elementTop < simpleParallaxVanilla_es_s.positions.bottom;
+        }
+        getRangeMax() {
+            const t = this.element.clientHeight;
+            this.rangeMax = t * this.settings.scale - t;
+        }
+        getTranslateValue() {
+            let t = ((simpleParallaxVanilla_es_s.positions.bottom - this.elementTop) / ((simpleParallaxVanilla_es_s.positions.height + this.elementHeight) / 100)).toFixed(1);
+            return t = Math.min(100, Math.max(0, t)), this.settings.maxTransition !== 0 && t > this.settings.maxTransition && (t = this.settings.maxTransition), 
+            this.oldPercentage === t || (this.rangeMax || this.getRangeMax(), this.translateValue = (t / 100 * this.rangeMax - this.rangeMax / 2).toFixed(0), 
+            this.oldTranslateValue === this.translateValue) ? !1 : (this.oldPercentage = t, 
+            this.oldTranslateValue = this.translateValue, !0);
+        }
+        animate() {
+            let n, t = 0, e = 0;
+            (this.settings.orientation.includes("left") || this.settings.orientation.includes("right")) && (e = `${this.settings.orientation.includes("left") ? this.translateValue * -1 : this.translateValue}px`), 
+            (this.settings.orientation.includes("up") || this.settings.orientation.includes("down")) && (t = `${this.settings.orientation.includes("up") ? this.translateValue * -1 : this.translateValue}px`), 
+            this.settings.overflow === !1 ? n = `translate3d(${e}, ${t}, 0) scale(${this.settings.scale})` : n = `translate3d(${e}, ${t}, 0)`, 
+            this.element.style[simpleParallaxVanilla_es_r] = n;
+        }
+    }
+    let simpleParallaxVanilla_es_l, simpleParallaxVanilla_es_u, simpleParallaxVanilla_es_a = !1, simpleParallaxVanilla_es_o = [];
+    class simpleParallaxVanilla_es_g {
+        constructor(t, e) {
+            t && simpleParallaxVanilla_es_d() && (this.prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches, 
+            this.reducedMotionMediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)"), 
+            this.handleReducedMotionChange = this.handleReducedMotionChange.bind(this), this.reducedMotionMediaQuery.addEventListener("change", this.handleReducedMotionChange), 
+            !this.prefersReducedMotion && (this.elements = simpleParallaxVanilla_es_h(t), this.defaults = {
+                delay: 0,
+                orientation: "up",
+                scale: 1.3,
+                overflow: !1,
+                transition: "cubic-bezier(0,0,0,1)",
+                customContainer: "",
+                customWrapper: "",
+                maxTransition: 0
+            }, this.settings = Object.assign(this.defaults, e), this.settings.customContainer && ([this.customContainer] = simpleParallaxVanilla_es_h(this.settings.customContainer)), 
+            this.lastPosition = -1, this.resizeIsDone = this.resizeIsDone.bind(this), this.refresh = this.refresh.bind(this), 
+            this.proceedRequestAnimationFrame = this.proceedRequestAnimationFrame.bind(this), 
+            this.init()));
+        }
+        handleReducedMotionChange(t) {
+            this.prefersReducedMotion = t.matches, this.prefersReducedMotion ? this.destroy() : this.init();
+        }
+        init() {
+            this.prefersReducedMotion || (simpleParallaxVanilla_es_s.setViewportAll(this.customContainer), 
+            simpleParallaxVanilla_es_o = [ ...this.elements.map((t => new simpleParallaxVanilla_es_f(t, this.settings, this.prefersReducedMotion))), ...simpleParallaxVanilla_es_o ], 
+            simpleParallaxVanilla_es_a || (this.proceedRequestAnimationFrame(), window.addEventListener("resize", this.resizeIsDone), 
+            simpleParallaxVanilla_es_a = !0));
+        }
+        resizeIsDone() {
+            clearTimeout(simpleParallaxVanilla_es_u), simpleParallaxVanilla_es_u = setTimeout(this.refresh, 200);
+        }
+        proceedRequestAnimationFrame() {
+            if (simpleParallaxVanilla_es_s.setViewportTop(this.customContainer), this.lastPosition === simpleParallaxVanilla_es_s.positions.top) {
+                simpleParallaxVanilla_es_l = window.requestAnimationFrame(this.proceedRequestAnimationFrame);
+                return;
+            }
+            simpleParallaxVanilla_es_s.setViewportBottom(), simpleParallaxVanilla_es_o.forEach((t => {
+                this.proceedElement(t);
+            })), simpleParallaxVanilla_es_l = window.requestAnimationFrame(this.proceedRequestAnimationFrame), 
+            this.lastPosition = simpleParallaxVanilla_es_s.positions.top;
+        }
+        proceedElement(t) {
+            let e = !1;
+            this.customContainer ? e = t.checkIfVisible() : e = t.isVisible, e && t.getTranslateValue() && t.animate();
+        }
+        refresh() {
+            simpleParallaxVanilla_es_s.setViewportAll(this.customContainer), simpleParallaxVanilla_es_o.forEach((t => {
+                t.getElementOffset(), t.getRangeMax();
+            })), this.lastPosition = -1;
+        }
+        destroy() {
+            this.reducedMotionMediaQuery && this.reducedMotionMediaQuery.removeEventListener("change", this.handleReducedMotionChange);
+            const t = [];
+            simpleParallaxVanilla_es_o = simpleParallaxVanilla_es_o.filter((e => this.elements && this.elements.includes(e.element) ? (t.push(e), 
+            !1) : e)), t.forEach((e => {
+                e.unSetStyle(), this.settings && this.settings.overflow === !1 && e.unWrapElement();
+            })), simpleParallaxVanilla_es_o.length || (window.cancelAnimationFrame(simpleParallaxVanilla_es_l), 
+            window.removeEventListener("resize", this.refresh), simpleParallaxVanilla_es_a = !1);
+        }
+    }
     isWebp();
     addLoadedClass();
     menuInit();
@@ -8386,84 +8819,8 @@
             if (select.value === "") select.classList.add("placeholder"); else select.classList.remove("placeholder");
         }
     }
-    function sectionBgParallaxReverse() {
-        const section = document.querySelector("[data-parallax-section]");
-        if (!section) return;
-        const сontainer = section.querySelector("[data-parallax-padding]");
-        const bg = section.querySelector("[data-parallax-img]");
-        requestAnimationFrame((() => {
-            if (bg && section) {
-                let targetY = 0;
-                let currentY = 0;
-                let isAnimating = false;
-                const easing = .5;
-                const precision = .5;
-                let initialOffset = parseFloat(window.getComputedStyle(сontainer).getPropertyValue("padding-top")) - 20;
-                function updatePosition() {
-                    currentY += (targetY - currentY) * easing;
-                    bg.style.transform = `translate3d(0,${currentY}px,0)`;
-                    if (Math.abs(targetY - currentY) > precision) requestAnimationFrame(updatePosition); else isAnimating = false;
-                }
-                function apply() {
-                    initialOffset = window.innerWidth > 768 ? 100 : 50;
-                    const rect = section.getBoundingClientRect();
-                    const windowHeight = window.innerHeight;
-                    const distanceToBottom = rect.bottom - windowHeight;
-                    if (rect.bottom > 0 && rect.top < windowHeight) {
-                        const sectionHeight = rect.height;
-                        let progress = 1 - Math.min(Math.max(distanceToBottom / sectionHeight, 0), 1);
-                        targetY = (1 - progress) * initialOffset;
-                        if (!isAnimating) {
-                            isAnimating = true;
-                            requestAnimationFrame(updatePosition);
-                        }
-                    }
-                }
-                apply();
-                window.addEventListener("scroll", (() => apply()));
-                bg.style.transform = `translate3d(0,${initialOffset}px,0)`;
-                currentY = initialOffset;
-            }
-        }));
-    }
-    function mainBgParallax() {
-        const elements = document.querySelectorAll("[data-parallax]");
-        if (!elements.length) return;
-        let targets = [];
-        elements.forEach((el => {
-            targets.push({
-                element: el,
-                targetY: 0,
-                currentY: 0
-            });
-        }));
-        let isAnimating = false;
-        const easing = 1;
-        const precision = 1;
-        function updatePositions() {
-            let stillAnimating = false;
-            targets.forEach((t => {
-                t.currentY += (t.targetY - t.currentY) * easing;
-                t.element.style.transform = `translate3d(0,${t.currentY}px,0)`;
-                if (Math.abs(t.targetY - t.currentY) > precision) stillAnimating = true;
-            }));
-            if (stillAnimating) requestAnimationFrame(updatePositions); else isAnimating = false;
-        }
-        window.addEventListener("scroll", (() => {
-            const scrollYValue = scrollY;
-            targets.forEach((t => {
-                t.targetY = scrollYValue / 2.5;
-            }));
-            if (!isAnimating) {
-                isAnimating = true;
-                requestAnimationFrame(updatePositions);
-            }
-        }));
-    }
     toggleBtn();
     selectValuePlaceholder();
-    sectionBgParallaxReverse();
-    mainBgParallax();
     function formValidate() {
         const validateForms = document.querySelectorAll("form[data-validate]");
         if (validateForms.length) validateForms.forEach((form => {
@@ -8572,4 +8929,50 @@
             form.reset();
         }));
     }
+    function mainBgParallax() {
+        const elements = document.querySelectorAll("[data-parallax]");
+        if (!elements.length) return;
+        let targets = [];
+        elements.forEach((el => {
+            targets.push({
+                element: el,
+                targetY: 0,
+                currentY: 0
+            });
+        }));
+        let isAnimating = false;
+        const easing = 1;
+        const precision = .1;
+        function updatePositions() {
+            let stillAnimating = false;
+            targets.forEach((t => {
+                t.currentY += (t.targetY - t.currentY) * easing;
+                t.element.style.transform = `translate3d(0,${t.currentY}px,0)`;
+                if (Math.abs(t.targetY - t.currentY) > precision) stillAnimating = true;
+            }));
+            if (stillAnimating) requestAnimationFrame(updatePositions); else isAnimating = false;
+        }
+        window.addEventListener("scroll", (() => {
+            const scrollYValue = scrollY;
+            targets.forEach((t => {
+                t.targetY = scrollYValue / 2.5;
+            }));
+            if (!isAnimating) {
+                isAnimating = true;
+                requestAnimationFrame(updatePositions);
+            }
+        }));
+    }
+    mainBgParallax();
+    function initSimpleParallax() {
+        const images = document.querySelectorAll("[data-parallax-section]");
+        images.length && images.forEach((image => {
+            new simpleParallaxVanilla_es_g(image, {
+                delay: .5,
+                orientation: "up",
+                scale: 1.27
+            });
+        }));
+    }
+    initSimpleParallax();
 })();
